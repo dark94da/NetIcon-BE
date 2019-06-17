@@ -1,4 +1,4 @@
-package com.neticon.neticon.datasource;
+package com.neticon.neticon.repository.datasource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

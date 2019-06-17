@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NeticonApplication {
+public class NetIconApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NeticonApplication.class, args);
+		SpringApplication.run(NetIconApplication.class, args);
 	}
 
 }
