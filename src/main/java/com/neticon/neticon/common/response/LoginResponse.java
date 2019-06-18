@@ -1,4 +1,4 @@
-package com.neticon.neticon.common.domain.response;
+package com.neticon.neticon.common.response;
 
 import lombok.Data;
 

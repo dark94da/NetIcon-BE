@@ -1,8 +1,8 @@
 package com.neticon.neticon.api.controller;
 
-import com.neticon.neticon.common.domain.request.LoginRequest;
-import com.neticon.neticon.common.domain.response.BaseResponse;
-import com.neticon.neticon.common.domain.response.LoginResponse;
+import com.neticon.neticon.common.request.LoginRequest;
+import com.neticon.neticon.common.response.BaseResponse;
+import com.neticon.neticon.common.response.LoginResponse;
 import com.neticon.neticon.core.user.LoginCommand;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

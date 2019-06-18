@@ -1,4 +1,4 @@
-package com.neticon.neticon.common.domain.request;
+package com.neticon.neticon.common.request;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

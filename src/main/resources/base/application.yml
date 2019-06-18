@@ -1,0 +1,4 @@
+# mybatis 配置
+mybatis:
+  typeAliasesPackage: com.neticon.neticon.common.domain
+  mapperLocations: classpath:com/neticon/neticon/repository/mybatis/mapper/*.xml

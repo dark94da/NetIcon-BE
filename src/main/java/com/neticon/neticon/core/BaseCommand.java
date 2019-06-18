@@ -1,6 +1,6 @@
 package com.neticon.neticon.core;
 
-import com.neticon.neticon.common.domain.response.BaseResponse;
+import com.neticon.neticon.common.response.BaseResponse;
 import com.neticon.neticon.common.enums.NetIconErrorCodeEnum;
 
 public abstract class BaseCommand {
