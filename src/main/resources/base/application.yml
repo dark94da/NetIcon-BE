@@ -2,3 +2,10 @@
 mybatis:
   typeAliasesPackage: com.neticon.neticon.common.domain
   mapperLocations: classpath:com/neticon/neticon/repository/mybatis/mapper/*.xml
+
+# redis 配置
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
