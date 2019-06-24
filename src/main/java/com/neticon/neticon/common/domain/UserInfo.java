@@ -9,6 +9,10 @@ public class UserInfo implements Serializable {
 
     private String identifier;
 
+    private String roomList;
+
+    private String pendingList;
+
     private Long createdAt;
 
     private Long updatedAt;
@@ -37,6 +41,22 @@ public class UserInfo implements Serializable {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public String getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(String roomList) {
+        this.roomList = roomList;
+    }
+
+    public String getPendingList() {
+        return pendingList;
+    }
+
+    public void setPendingList(String pendingList) {
+        this.pendingList = pendingList;
     }
 
     public Long getCreatedAt() {

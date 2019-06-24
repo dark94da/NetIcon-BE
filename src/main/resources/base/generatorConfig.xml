@@ -50,6 +50,19 @@
             <columnOverride column="id" javaType="Long"/>
             <columnOverride column="nickname" javaType="String"/>
             <columnOverride column="identifier" javaType="String"/>
+            <columnOverride column="room_list" javaType="String"/>
+            <columnOverride column="pending_list" javaType="String"/>
+            <columnOverride column="created_at" javaType="Long"/>
+            <columnOverride column="updated_at" javaType="Long"/>
+        </table>
+
+        <!--房间信息表-->
+        <table tableName="room_info" domainObjectName="RoomInfo">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="id" javaType="Long"/>
+            <columnOverride column="room_id" javaType="Integer"/>
+            <columnOverride column="member_list" javaType="String"/>
+            <columnOverride column="last_talk_at" javaType="Long"/>
             <columnOverride column="created_at" javaType="Long"/>
             <columnOverride column="updated_at" javaType="Long"/>
         </table>

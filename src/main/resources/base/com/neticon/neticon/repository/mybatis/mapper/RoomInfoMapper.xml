@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.neticon.neticon.repository.mybatis.mapper.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.neticon.neticon.common.domain.UserInfo" >
+<mapper namespace="com.neticon.neticon.repository.mybatis.mapper.RoomInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.neticon.neticon.common.domain.RoomInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="identifier" property="identifier" jdbcType="VARCHAR" />
-    <result column="room_list" property="roomList" jdbcType="VARCHAR" />
-    <result column="pending_list" property="pendingList" jdbcType="VARCHAR" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="member_list" property="memberList" jdbcType="VARCHAR" />
+    <result column="last_talk_at" property="lastTalkAt" jdbcType="INTEGER" />
     <result column="created_at" property="createdAt" jdbcType="INTEGER" />
     <result column="updated_at" property="updatedAt" jdbcType="INTEGER" />
   </resultMap>
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, nickname, identifier, room_list, pending_list, created_at, updated_at
+    id, room_id, member_list, last_talk_at, created_at, updated_at
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neticon.neticon.common.domain.UserInfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neticon.neticon.common.domain.RoomInfoExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_info
+    from room_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,41 +87,36 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from user_info
+    from room_info
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from user_info
+    delete from room_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.neticon.neticon.common.domain.UserInfoExample" >
-    delete from user_info
+  <delete id="deleteByExample" parameterType="com.neticon.neticon.common.domain.RoomInfoExample" >
+    delete from room_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.neticon.neticon.common.domain.UserInfo" useGeneratedKeys="true" keyProperty="id" >
-    insert into user_info (nickname, identifier, room_list, 
-      pending_list, created_at, updated_at
-      )
-    values (#{nickname,jdbcType=VARCHAR}, #{identifier,jdbcType=VARCHAR}, #{roomList,jdbcType=VARCHAR}, 
-      #{pendingList,jdbcType=VARCHAR}, #{createdAt,jdbcType=INTEGER}, #{updatedAt,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.neticon.neticon.common.domain.RoomInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into room_info (room_id, member_list, last_talk_at, 
+      created_at, updated_at)
+    values (#{roomId,jdbcType=INTEGER}, #{memberList,jdbcType=VARCHAR}, #{lastTalkAt,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=INTEGER}, #{updatedAt,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.neticon.neticon.common.domain.UserInfo" useGeneratedKeys="true" keyProperty="id" >
-    insert into user_info
+  <insert id="insertSelective" parameterType="com.neticon.neticon.common.domain.RoomInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into room_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="nickname != null" >
-        nickname,
+      <if test="roomId != null" >
+        room_id,
       </if>
-      <if test="identifier != null" >
-        identifier,
+      <if test="memberList != null" >
+        member_list,
       </if>
-      <if test="roomList != null" >
-        room_list,
-      </if>
-      <if test="pendingList != null" >
-        pending_list,
+      <if test="lastTalkAt != null" >
+        last_talk_at,
       </if>
       <if test="createdAt != null" >
         created_at,
@@ -132,17 +126,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="identifier != null" >
-        #{identifier,jdbcType=VARCHAR},
+      <if test="memberList != null" >
+        #{memberList,jdbcType=VARCHAR},
       </if>
-      <if test="roomList != null" >
-        #{roomList,jdbcType=VARCHAR},
-      </if>
-      <if test="pendingList != null" >
-        #{pendingList,jdbcType=VARCHAR},
+      <if test="lastTalkAt != null" >
+        #{lastTalkAt,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null" >
         #{createdAt,jdbcType=INTEGER},
@@ -152,29 +143,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neticon.neticon.common.domain.UserInfoExample" resultType="java.lang.Integer" >
-    select count(*) from user_info
+  <select id="countByExample" parameterType="com.neticon.neticon.common.domain.RoomInfoExample" resultType="java.lang.Integer" >
+    select count(*) from room_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_info
+    update room_info
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.nickname != null" >
-        nickname = #{record.nickname,jdbcType=VARCHAR},
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
-      <if test="record.identifier != null" >
-        identifier = #{record.identifier,jdbcType=VARCHAR},
+      <if test="record.memberList != null" >
+        member_list = #{record.memberList,jdbcType=VARCHAR},
       </if>
-      <if test="record.roomList != null" >
-        room_list = #{record.roomList,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pendingList != null" >
-        pending_list = #{record.pendingList,jdbcType=VARCHAR},
+      <if test="record.lastTalkAt != null" >
+        last_talk_at = #{record.lastTalkAt,jdbcType=INTEGER},
       </if>
       <if test="record.createdAt != null" >
         created_at = #{record.createdAt,jdbcType=INTEGER},
@@ -188,32 +176,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_info
+    update room_info
     set id = #{record.id,jdbcType=BIGINT},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      identifier = #{record.identifier,jdbcType=VARCHAR},
-      room_list = #{record.roomList,jdbcType=VARCHAR},
-      pending_list = #{record.pendingList,jdbcType=VARCHAR},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      member_list = #{record.memberList,jdbcType=VARCHAR},
+      last_talk_at = #{record.lastTalkAt,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=INTEGER},
       updated_at = #{record.updatedAt,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.neticon.neticon.common.domain.UserInfo" >
-    update user_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.neticon.neticon.common.domain.RoomInfo" >
+    update room_info
     <set >
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="identifier != null" >
-        identifier = #{identifier,jdbcType=VARCHAR},
+      <if test="memberList != null" >
+        member_list = #{memberList,jdbcType=VARCHAR},
       </if>
-      <if test="roomList != null" >
-        room_list = #{roomList,jdbcType=VARCHAR},
-      </if>
-      <if test="pendingList != null" >
-        pending_list = #{pendingList,jdbcType=VARCHAR},
+      <if test="lastTalkAt != null" >
+        last_talk_at = #{lastTalkAt,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null" >
         created_at = #{createdAt,jdbcType=INTEGER},
@@ -224,23 +208,22 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.neticon.neticon.common.domain.UserInfo" >
-    update user_info
-    set nickname = #{nickname,jdbcType=VARCHAR},
-      identifier = #{identifier,jdbcType=VARCHAR},
-      room_list = #{roomList,jdbcType=VARCHAR},
-      pending_list = #{pendingList,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.neticon.neticon.common.domain.RoomInfo" >
+    update room_info
+    set room_id = #{roomId,jdbcType=INTEGER},
+      member_list = #{memberList,jdbcType=VARCHAR},
+      last_talk_at = #{lastTalkAt,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=INTEGER},
       updated_at = #{updatedAt,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="BaseResultMap" parameterType="com.neticon.neticon.common.domain.UserInfoExample" id="selectByExampleWithRowbounds" >
+  <select resultMap="BaseResultMap" parameterType="com.neticon.neticon.common.domain.RoomInfoExample" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_info
+    from room_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
