@@ -1,4 +1,4 @@
-package com.neticon.neticon.core.user;
+package com.neticon.neticon.core.session;
 
 import com.neticon.neticon.common.enums.NetIconErrorCodeEnum;
 import com.neticon.neticon.common.request.LoginRequest;

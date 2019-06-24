@@ -4,6 +4,6 @@ import com.neticon.neticon.common.vo.UserInfoVo;
 import lombok.Data;
 
 @Data
-public class BaseRequest {
+abstract class BaseRequest {
     private UserInfoVo userInfo;
 }
