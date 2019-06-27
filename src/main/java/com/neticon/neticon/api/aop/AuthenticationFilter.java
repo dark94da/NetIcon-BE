@@ -42,10 +42,15 @@ public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        //获取请求报文头部元数据
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes)
                 RequestContextHolder.getRequestAttributes();
         HttpServletRequest httpRequest = (HttpServletRequest) request;
+        // websocket has its own way to authenticate
+        if (httpRequest.getHeader("Upgrade") != null
+                && httpRequest.getHeader("Upgrade").equals("websocket")) {
+            chain.doFilter(request, response);
+            return;
+        }
         if (!"options".equals(httpRequest.getMethod().toLowerCase())) {
             if (isRequestNeedAuthentication(
                     requestAttributes.getRequest().getRequestURI(),
