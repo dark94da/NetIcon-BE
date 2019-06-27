@@ -25,4 +25,12 @@ public class UserInfoRepositoryImpl {
     public boolean insertUserInfo(UserInfo userInfo) {
         return userInfoMapper.insertSelective(DBUtils.completeInsert(userInfo)) > 0;
     }
+
+    public void updateUserInfo(UserInfo userInfo) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample
+                .createCriteria()
+                .andNicknameEqualTo(userInfo.getNickname());
+        userInfoMapper.updateByExampleSelective(userInfo, userInfoExample);
+    }
 }

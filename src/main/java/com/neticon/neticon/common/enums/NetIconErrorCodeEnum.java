@@ -11,7 +11,8 @@ public enum NetIconErrorCodeEnum {
     INVALID_TOKEN(403, "无效的用户凭证"),
     INVALID_PARAMS(404, "错误的请求参数"),
     UNAVAILABLE_NICKNAME(405, "用户名不可用"),
-    DB_EXCEPTION(406, "数据库错误");
+    DB_EXCEPTION(406, "数据库错误"),
+    ROOM_AMOUNT_REACT_LIMIT(407, "无可用房间号");
 
     private Integer code;
     private String msg;
