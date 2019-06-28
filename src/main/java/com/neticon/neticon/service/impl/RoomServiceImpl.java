@@ -20,13 +20,13 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomInfoRedisRepositoryImpl roomInfoRedisRepository;
 
+    private final UserInfoRepositoryImpl userInfoRepository;
+
     public RoomServiceImpl(RoomInfoRedisRepositoryImpl roomInfoRedisRepository,
                            UserInfoRepositoryImpl userInfoRepository) {
         this.roomInfoRedisRepository = roomInfoRedisRepository;
         this.userInfoRepository = userInfoRepository;
     }
-
-    private final UserInfoRepositoryImpl userInfoRepository;
 
     @Override
     public int createNewRoom(String nickname) {
@@ -106,7 +106,8 @@ public class RoomServiceImpl implements RoomService {
         if (pendingList == null) {
             pendingList = new LinkedList<>();
         }
-        userInfo.setPendingList(JsonUtils.toJson(pendingList.add(roomId)));
+        pendingList.add(roomId);
+        userInfo.setPendingList(JsonUtils.toJson(pendingList));
         userInfoRepository.updateUserInfo(userInfo);
     }
 
@@ -118,7 +119,8 @@ public class RoomServiceImpl implements RoomService {
         if (pendingList == null) {
             return;
         }
-        userInfo.setPendingList(JsonUtils.toJson(pendingList.remove(roomId)));
+        pendingList.remove(roomId);
+        userInfo.setPendingList(JsonUtils.toJson(pendingList));
         userInfoRepository.updateUserInfo(userInfo);
     }
 
@@ -130,7 +132,8 @@ public class RoomServiceImpl implements RoomService {
         if (roomList == null) {
             roomList = new LinkedList<>();
         }
-        userInfo.setRoomList(JsonUtils.toJson(roomList.add(roomId)));
+        roomList.add(roomId);
+        userInfo.setRoomList(JsonUtils.toJson(roomList));
         userInfoRepository.updateUserInfo(userInfo);
     }
 
@@ -142,7 +145,8 @@ public class RoomServiceImpl implements RoomService {
         if (roomList == null) {
             return;
         }
-        userInfo.setRoomList(JsonUtils.toJson(roomList.remove(roomId)));
+        roomList.remove(roomId);
+        userInfo.setRoomList(JsonUtils.toJson(roomList));
         userInfoRepository.updateUserInfo(userInfo);
     }
 }
